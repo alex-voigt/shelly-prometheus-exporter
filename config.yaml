@@ -1,0 +1,7 @@
+port: 9123
+requestTimeout: 5s
+scrapeInterval: 60s
+devices:
+  - macAddress: "ABC12345"
+    displayName: "livingRoomShutter"
+    type: "switch25"
