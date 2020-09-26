@@ -18,5 +18,5 @@ jobs:
         run: |
           docker buildx build --push \
             --tag 'alex-void/shelly-prometheus-exporter:'$(date +%Y-%B) \
-            --file 'shelly-prometheus-exporter/Dockerfile' \
+            --file './Dockerfile' \
             --platform linux/amd64,linux/arm/v7 .
