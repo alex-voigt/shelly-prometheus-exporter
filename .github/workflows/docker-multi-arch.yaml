@@ -38,8 +38,11 @@ jobs:
         env:
           TAG_NAME: ${{ github.event.release.tag_name }}
           TEST: "something"
+          RELEASE_VERSION: $(echo ${GITHUB_REF:10})
           SOURCE_TAG: ${{ steps.branch_name.outputs.SOURCE_TAG }}
         run: |
+          echo $RELEASE_VERSION \
+          echo '$RELEASE_VERSION' \
           echo $TAG_NAME \
           echo '$TAG_NAME' \
           echo $SOURCE_TAG \
