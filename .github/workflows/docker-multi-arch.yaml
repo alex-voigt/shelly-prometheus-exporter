@@ -17,6 +17,6 @@ jobs:
       - name: Build and push the images
         run: |
           docker buildx build --push \
-            --tag 'alex-void/shelly-prometheus-exporter:'$(date +%Y-%B) \
+            --tag 'alexvoigt/shelly-prometheus-exporter:'$(date +%Y-%B) \
             --file './Dockerfile' \
             --platform linux/amd64,linux/arm/v7 .
