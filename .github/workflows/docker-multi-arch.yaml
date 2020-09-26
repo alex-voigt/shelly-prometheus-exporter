@@ -1,10 +1,8 @@
 name: Docker build and push multi arch images
-#on:
-#  push:
-#    branches:
-#      - master
 on:
   push:
+    branches:
+      - master
     tags:
       - '*'
 jobs:
@@ -33,15 +31,19 @@ jobs:
       - name: Build and push latest images
         env:
           TAG_NAME: ${{ github.event.release.tag_name }}
+          TEST: "something"
         run: |
           echo $TAG_NAME \
-          echo '$TAG_NAME'
+          echo '$TAG_NAME' \
+          echo $TEST \
+          echo '$TEST'
       - name: Build and push tagged images
         if: ${{ github.event.release.tag_name }} != ""
         env:
           TAG_NAME: ${{ github.event.release.tag_name }}
         run: |
-          echo $TAG_NAME
+          echo $TAG_NAME \
+          echo ${{ github.event.release.tag_name }}
 #          docker buildx build --push \
 #            --tag 'alexvoigt/shelly-prometheus-exporter:$TAG_NAME' \
 #            --file './Dockerfile' \
