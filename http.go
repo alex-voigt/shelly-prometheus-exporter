@@ -44,6 +44,7 @@ func fetchDevices(config configuration) {
 	for _, device := range config.Devices {
 		labels := map[string]string{
 			"name": device.DisplayName,
+			"mac":  device.MACAddress,
 			"type": device.Type,
 		}
 
