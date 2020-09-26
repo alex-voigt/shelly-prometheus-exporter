@@ -39,8 +39,8 @@ jobs:
         env:
           SOURCE_TAG: ${{ steps.branch_name.outputs.SOURCE_TAG }}
         run: |
-          echo SOURCE_TAG \
-          echo '$SOURCE_TAG'
+          echo $SOURCE_TAG \
+          echo '$SOURCE_TAG' \
           echo '${SOURCE_TAG}'
 #          docker buildx build --push \
 #            --tag 'alexvoigt/shelly-prometheus-exporter:$TAG_NAME' \
