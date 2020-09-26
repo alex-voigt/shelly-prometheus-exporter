@@ -1,8 +1,9 @@
 name: Docker build and push multi arch images
 on:
   push:
-    #    branches:
-    #      - master
+    branches:
+      - master
+      - deployment-test
     tags:
       - '*'
 jobs:
