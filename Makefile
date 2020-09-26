@@ -9,7 +9,7 @@ help:
 
 .PHONY: run
 run:
-	go run *.go
+	go build && ./shelly-exporter
 
 .PHONY: watch
 watch:

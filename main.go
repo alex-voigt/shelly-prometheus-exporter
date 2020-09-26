@@ -18,6 +18,7 @@ func main() {
 		}
 	}(config)
 
+	fmt.Println(fmt.Sprintf("starting web server on port %d", config.Port))
 	http.Handle("/metrics", promhttp.Handler())
-	http.ListenAndServe(fmt.Sprintf("localhost:%d", config.Port), nil)
+	http.ListenAndServe(fmt.Sprintf(":%d", config.Port), nil)
 }
