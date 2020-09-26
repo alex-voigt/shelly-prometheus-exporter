@@ -1,5 +1,7 @@
 name: Docker build and push multi arch images
-on: [push]
+on:
+  push:
+    branches: master
 jobs:
   build:
     runs-on: ubuntu-latest
