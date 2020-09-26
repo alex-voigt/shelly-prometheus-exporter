@@ -28,34 +28,20 @@ jobs:
       #            --tag 'alexvoigt/shelly-prometheus-exporter:latest' \
       #            --file './Dockerfile' \
       #            --platform linux/amd64,linux/arm/v7 .
-      - name: Branch name
+      - name: Branch name helper
         id: branch_name
         run: |
           echo ::set-output name=SOURCE_NAME::${GITHUB_REF#refs/*/}
           echo ::set-output name=SOURCE_BRANCH::${GITHUB_REF#refs/heads/}
           echo ::set-output name=SOURCE_TAG::${GITHUB_REF#refs/tags/}
-      - name: Build and push latest images
+      - name: Build and push tagged images
+        if: ${{ steps.branch_name.outputs.SOURCE_TAG }} != ""
         env:
-          TAG_NAME: ${{ github.event.release.tag_name }}
-          TEST: "something"
-          RELEASE_VERSION: $(echo ${GITHUB_REF:10})
           SOURCE_TAG: ${{ steps.branch_name.outputs.SOURCE_TAG }}
         run: |
-          echo $RELEASE_VERSION \
-          echo '$RELEASE_VERSION' \
-          echo $TAG_NAME \
-          echo '$TAG_NAME' \
-          echo $SOURCE_TAG \
-          echo '$SOURCE_TAG' \
-          echo $TEST \
-          echo '$TEST'
-      - name: Build and push tagged images
-        if: ${{ github.event.release.tag_name }} != ""
-        env:
-          TAG_NAME: ${{ github.event.release.tag_name }}
-        run: |
-          echo $TAG_NAME \
-          echo ${{ github.event.release.tag_name }}
+          echo SOURCE_TAG \
+          echo '$SOURCE_TAG'
+          echo '${SOURCE_TAG}'
 #          docker buildx build --push \
 #            --tag 'alexvoigt/shelly-prometheus-exporter:$TAG_NAME' \
 #            --file './Dockerfile' \
