@@ -1,0 +1,22 @@
+name: Docker build and push multi arch images
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Install buildx for multi-arch Docker images
+        id: buildx
+        uses: crazy-max/ghaction-docker-buildx@v3
+        with:
+          buildx-version: latest
+          qemu-version: latest
+      - name: DockerHub login
+        run: docker login --username='${{ secrets.DOCKER_USER }}' --password=${{ secrets.DOCKER_PASS }}
+      - name: Build and push the images
+        run: |
+          docker buildx build --push \
+            --tag 'alex-void/shelly-prometheus-exporter:'$(date +%Y-%B) \
+            --file 'shelly-prometheus-exporter/Dockerfile' \
+            --platform linux/amd64,linux/arm/v7 .
